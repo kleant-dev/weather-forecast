@@ -54,4 +54,18 @@ public class WeatherForecastController : ControllerBase
         
         return Ok(extremes);
     }
+    
+    [HttpGet("instance")]
+    public IActionResult GetInstance()
+    {
+        var instanceId = Environment.GetEnvironmentVariable("WEBSITE_INSTANCE_ID") ?? "Local";
+        var computerName = Environment.MachineName;
+    
+        return Ok(new 
+        { 
+            InstanceId = instanceId,
+            MachineName = computerName,
+            Timestamp = DateTime.UtcNow
+        });
+    }
 }
